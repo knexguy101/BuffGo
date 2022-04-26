@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/knexguy101/BuffGo/buff/history"
 	"github.com/knexguy101/BuffGo/buff/login"
 	"github.com/knexguy101/BuffGo/buff/search"
 	structs "github.com/knexguy101/BuffGo/models/client"
@@ -30,13 +31,13 @@ func main() {
 
 	randomItem := marketResults[rand.Intn(len(marketResults))]
 
-	resItems, err := search.Item(search.NewSearchFilter(randomItem.GoodsIds, search.DEFAULT, 1, true), client)
+	resItems, err := history.Prices(randomItem.GoodsIds, "CNY", client)
 	if err != nil {
 		panic(err)
 	}
 
 	fmt.Println("Item results")
-	for _, v := range resItems {
-		fmt.Println(v.ID, v.Price, v.AssetInfo.Paintwear)
+	for _, v := range resItems.Data.PriceHistory {
+		fmt.Println(v[0], v[1]) //timestamp, price
 	}
 }
