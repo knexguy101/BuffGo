@@ -9,6 +9,7 @@ import (
 	"net/url"
 )
 
+//Market searches the market for items given a query string
 func Market(search string, client *structs.HttpClient) (suggestions []Suggestion, err error) {
 
 	var (

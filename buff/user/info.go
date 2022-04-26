@@ -7,6 +7,7 @@ import (
 	"net/http"
 )
 
+//GetUserInfo returns a user's info
 func GetUserInfo(client *structs.HttpClient) (info *Info, err error) {
 
 	var (

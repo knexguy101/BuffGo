@@ -7,6 +7,7 @@ import (
 	"net/http"
 )
 
+//Buy attempts to buy the given item given the args provided
 func Buy(goodsId, price int, sellOrderId string, method PayMethod, client *structs.HttpClient) (purchase *PurchaseResponse, err error) {
 
 	var (

@@ -8,6 +8,7 @@ import (
 	"net/http"
 )
 
+//Status gets the status of an orderId
 func Status(orderId string, client *structs.HttpClient) (purchase *PurchaseStatus, err error) {
 
 	var (

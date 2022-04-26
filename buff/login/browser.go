@@ -6,6 +6,7 @@ import (
 	"github.com/go-rod/rod/lib/proto"
 )
 
+//Login opens a browser and collects cookies needed to automate the site.
 func Login() (*LoginData, error) {
 	u := launcher.New().Headless(false).MustLaunch()
 	b := rod.New().ControlURL(u).MustConnect()

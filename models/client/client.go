@@ -12,6 +12,7 @@ type HttpClient struct {
 	UserAgent string
 }
 
+//NewHttpClient creates a new httpClient
 func NewHttpClient() *HttpClient {
 	return &HttpClient{
 		Tr: &http.Transport{
@@ -23,21 +24,26 @@ func NewHttpClient() *HttpClient {
 	}
 }
 
+//ClearCookies removes all cookies from the httpClient
 func (c *HttpClient) ClearCookies() {
 	c.Cookies = make(map[string]*http.Cookie)
 }
 
+//AddCookie adds a specified cookie to the http client
 func (c *HttpClient) AddCookie(name, value, domain, path string) {
+	//you can make domain/path functional if you would like
 	c.Cookies[name] = &http.Cookie{
 		Name:  name,
 		Value: value,
 	}
 }
 
+//RemoveCookie deletes a cookie from the httpClient
 func (c *HttpClient) RemoveCookie(name string) {
 	delete(c.Cookies, name)
 }
 
+//GetCookie retrieves a cookie and its value
 func (c *HttpClient) GetCookie(name string) (string, bool) {
 	val, ok := c.Cookies[name]
 	if !ok {
@@ -46,6 +52,7 @@ func (c *HttpClient) GetCookie(name string) (string, bool) {
 	return val.Value, ok
 }
 
+//Send sends a http request
 func (c *HttpClient) Send(request *http.Request, useCookies, followRedirect bool) (*http.Response, error) {
 
 	customCookie := true
@@ -98,12 +105,14 @@ func (c *HttpClient) Send(request *http.Request, useCookies, followRedirect bool
 	return res, nil
 }
 
+//SaveCookies saves the cookies of an httpResponse to the httpClient
 func (c *HttpClient) SaveCookies(res *http.Response) {
 	for _, v := range res.Cookies() {
 		c.Cookies[v.Name] = v
 	}
 }
 
+//GetCookieString returns the Cookie header
 func (c *HttpClient) GetCookieString() string {
 	var str []string
 	for k, v := range c.Cookies {

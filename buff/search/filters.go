@@ -25,6 +25,7 @@ type ItemFilter struct {
 	AllowTradeCooldown bool
 }
 
+//NewSearchFilter Creates a new search filter
 func NewSearchFilter(goodsId string, sortBy SortBy, pageNum int, allowTradeCooldown bool) *ItemFilter {
 	return &ItemFilter{
 		GoodsId: goodsId,
@@ -34,6 +35,7 @@ func NewSearchFilter(goodsId string, sortBy SortBy, pageNum int, allowTradeCoold
 	}
 }
 
+//ToQuery pushes the ItemFilter into a query string
 func (f *ItemFilter) ToQuery() string {
 	trade := 1
 	if !f.AllowTradeCooldown {

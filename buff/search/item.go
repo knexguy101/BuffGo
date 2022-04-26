@@ -8,6 +8,7 @@ import (
 	"net/http"
 )
 
+//Item searches a specific item with a specified ItemFilter
 func Item(filter *ItemFilter, client *structs.HttpClient) (items []SearchItem, err error) {
 	var (
 		res *http.Response
