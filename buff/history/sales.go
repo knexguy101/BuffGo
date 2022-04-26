@@ -1,9 +1,9 @@
 package history
 
 import (
-	structs "buffGo/models/client"
 	"encoding/json"
 	"fmt"
+	structs "github.com/knexguy101/BuffGo/models/client"
 	"io"
 	"net/http"
 )

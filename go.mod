@@ -1,4 +1,4 @@
-module buffGo
+module github.com/knexguy101/BuffGo
 
 go 1.17
 

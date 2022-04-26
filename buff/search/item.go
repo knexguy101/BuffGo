@@ -1,7 +1,7 @@
 package search
 
 import (
-	structs "buffGo/models/client"
+	structs "github.com/knexguy101/BuffGo/models/client"
 	"encoding/json"
 	"fmt"
 	"io"
