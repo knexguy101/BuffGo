@@ -1,9 +1,70 @@
 package search
 
-type marketSearch struct {
+type MarketSearch struct {
 	Code string `json:"code"`
 	Data struct {
-		Suggestions []Suggestion `json:"suggestions"`
+		Items []struct {
+			Appid                 int         `json:"appid"`
+			Bookmarked            bool        `json:"bookmarked"`
+			BuyMaxPrice           string      `json:"buy_max_price"`
+			BuyNum                int         `json:"buy_num"`
+			CanBargain            bool        `json:"can_bargain"`
+			CanSearchByTournament bool        `json:"can_search_by_tournament"`
+			Description           interface{} `json:"description"`
+			Game                  string      `json:"game"`
+			GoodsInfo             struct {
+				IconURL string `json:"icon_url"`
+				Info    struct {
+					Tags struct {
+						Exterior struct {
+							Category      string `json:"category"`
+							InternalName  string `json:"internal_name"`
+							LocalizedName string `json:"localized_name"`
+						} `json:"exterior"`
+						Quality struct {
+							Category      string `json:"category"`
+							InternalName  string `json:"internal_name"`
+							LocalizedName string `json:"localized_name"`
+						} `json:"quality"`
+						Rarity struct {
+							Category      string `json:"category"`
+							InternalName  string `json:"internal_name"`
+							LocalizedName string `json:"localized_name"`
+						} `json:"rarity"`
+						Type struct {
+							Category      string `json:"category"`
+							InternalName  string `json:"internal_name"`
+							LocalizedName string `json:"localized_name"`
+						} `json:"type"`
+						Weapon struct {
+							Category      string `json:"category"`
+							InternalName  string `json:"internal_name"`
+							LocalizedName string `json:"localized_name"`
+						} `json:"weapon"`
+					} `json:"tags"`
+				} `json:"info"`
+				ItemID          interface{} `json:"item_id"`
+				OriginalIconURL string      `json:"original_icon_url"`
+				SteamPrice      string      `json:"steam_price"`
+				SteamPriceCny   string      `json:"steam_price_cny"`
+			} `json:"goods_info"`
+			HasBuffPriceHistory bool   `json:"has_buff_price_history"`
+			ID                  int    `json:"id"`
+			MarketHashName      string `json:"market_hash_name"`
+			MarketMinPrice      string `json:"market_min_price"`
+			Name                string `json:"name"`
+			QuickPrice          string `json:"quick_price"`
+			SellMinPrice        string `json:"sell_min_price"`
+			SellNum             int    `json:"sell_num"`
+			SellReferencePrice  string `json:"sell_reference_price"`
+			ShortName           string `json:"short_name"`
+			SteamMarketURL      string `json:"steam_market_url"`
+			TransactedNum       int    `json:"transacted_num"`
+		} `json:"items"`
+		PageNum    int `json:"page_num"`
+		PageSize   int `json:"page_size"`
+		TotalCount int `json:"total_count"`
+		TotalPage  int `json:"total_page"`
 	} `json:"data"`
 	Msg interface{} `json:"msg"`
 }

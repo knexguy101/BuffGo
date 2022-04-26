@@ -1,24 +1,23 @@
 package search
 
 import (
-	structs "github.com/knexguy101/BuffGo/models/client"
 	"encoding/json"
 	"fmt"
+	structs "github.com/knexguy101/BuffGo/models/client"
 	"io"
 	"net/http"
 	"net/url"
 )
 
 //Market searches the market for items given a query string
-func Market(search string, client *structs.HttpClient) (suggestions []Suggestion, err error) {
+func Market(search string, pageNum int, client *structs.HttpClient) (marketSearch *MarketSearch, err error) {
 
 	var (
 		res *http.Response
-		tempRes *marketSearch
 		resData []byte
 	)
 
-	res, err = client.Get(fmt.Sprintf("https://buff.163.com/api/market/search/suggest?text=%s&game=csgo", url.QueryEscape(search)))
+	res, err = client.Get(client.TS(fmt.Sprintf("https://buff.163.com/api/market/goods?game=csgo&page_num=%d&search=%s&use_suggestion=0&trigger=search_input&_=", pageNum, url.QueryEscape(search))))
 	if err != nil {
 		return
 	}
@@ -29,12 +28,10 @@ func Market(search string, client *structs.HttpClient) (suggestions []Suggestion
 		return
 	}
 
-	err = json.Unmarshal(resData, &tempRes)
+	err = json.Unmarshal(resData, &marketSearch)
 	if err != nil {
 		return
 	}
-
-	suggestions = tempRes.Data.Suggestions
 
 	return
 }

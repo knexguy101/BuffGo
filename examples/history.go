@@ -19,19 +19,19 @@ func main() {
 
 	login.AddLoginDataToClient(data, client)
 
-	marketResults, err := search.Market("ak slate", client)
+	marketResults, err := search.Market("ak slate", 1, client)
 	if err != nil {
 		panic(err)
 	}
 
 	fmt.Println("Search results")
-	for _, v := range marketResults {
-		fmt.Println(v.GoodsIds)
+	for _, v := range marketResults.Data.Items {
+		fmt.Println(v.ID)
 	}
 
-	randomItem := marketResults[rand.Intn(len(marketResults))]
+	randomItem := marketResults.Data.Items[rand.Intn(len(marketResults.Data.Items))]
 
-	resItems, err := history.Prices(randomItem.GoodsIds, "CNY", client)
+	resItems, err := history.Prices(fmt.Sprintf("%d", randomItem.ID), "CNY", client)
 	if err != nil {
 		panic(err)
 	}
